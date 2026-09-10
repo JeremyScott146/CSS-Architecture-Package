@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+/* poppins + inter fonts */
+
+/* Jeremy Scott's Portfolio Site 
+GIT 414/514 Fall Session-A 62919 | 76175
+CSS Architecture Package
+
+
+
+*/ 
+@layer reset, base, layout, components, utilities, states, overrides;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  p, 
+  ul, 
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer base {
+  :root {
+    /* Color tokens */
+    --color-bg: #f4f4f4;
+    --color-primary: #2e2e2e;
+    --color-secondary: #ffffff;
+    --color-surface: #f5f5f5;
+    --color-text: #222222;
+    --color-text-muted: #666666;
+    --color-primary-hover: #4930b8;
+    --color-border: #d9d9d9;
+    --color-error: #c62828;
+    --color-focus: #47ffbb;
+
+    /* component tokens */
+    --card-bg: var(--color-surface);
+    --card-border: var(--color-border);
+    --button-bg: var(--color-primary);
+    --btn-txt: var(--color-secondary);
+
+    /* Typography */
+    --font-body: "Inter", Arial, sans-serif;
+    --font-heading: 'Poppins', Arial, Helvetica, sans-serif;
+
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 2rem;
+
+
+    /* Spacing */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-8: 3rem;
+    --space-10: 4rem;
+
+    /* Shape */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+
+    /* Layout */
+    --container-max: 70rem;
+
+    /* Focus */
+    --focus-width: 3px;
+    --focus-color: #47ffbb;
+    --focus-offset: 3px;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+}
+
+@layer layout {
+    .container {
+        width: 100%;
+        max-width: var(--container-max);
+    }
+
+    .grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-5);
+    margin-block: var(--space-6);
+  }
+}
+
+@layer components {
+    /* nav bar & header sections */
+    .site-header {
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .nav-list {
+        display: flex;
+        gap: var(--space-5);
+        align-items: center; 
+    }
+
+    /* project card */
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--card-bg);
+        padding: var(--space-4);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius-md);
+        gap: var(--space-3);
+    }
+
+    /* le buttons */ 
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-2) var(--space-4);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        width: fit-content;
+    }
+
+    /* tech stack */ 
+    .tech-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: var(--space-2) var(--space-3);
+        border-radius: var(--radius-lg);
+        background: var(--color-primary);
+        color: var(--color-secondary);
+    }
+
+    /* forms */ 
+    .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+    }
+
+    
+    .form-input {
+        padding: var(--space-2);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background: var(--color-surface);
+    }
+
+    /* footer sections */
+    .site-footer {
+        background: var(--color-text);
+        color: var(--color-secondary);
+        text-align: center;
+        padding: var(--space-3);
+        margin: var(--space-6);
+    }
+}
+
+@layer utilities {
+    /* used google/AI on this section to find ideas for utilities for a portfolio site */ 
+
+    /* fluid typography between different size viewports */ 
+    .text-fluid-lg {
+        font-size: clamp(1.25rem, 2vw + 1rem, 2.25rem);
+    }
+
+    /* hide scrollbars */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none; /* Safari & Chrome */ 
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE & Edge */ 
+        scrollbar-width: none; /* firefox */
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        white-space: nowrap;
+        border: 0;
+    }
+}
+
+@layer states {
+    .nav-list a:hover {
+        color: var(--color-primary-hover);
+    }
+
+    .btn:hover {
+        background: var(--color-primary-hover);
+    }
+
+    *:focus-visible {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+    }
+
+    .nav-list a[aria-current="page"] {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    }
+
+    .form-input:invalid:not(:placeholder-shown) {
+    border-color: var(--color-error);
+    }
+}
+
+@layer overrides {
+    
+}
+
+@media print {
+        .site-header, .site-footer, .btn {
+            display: none;
+        }
+
+        body {
+            background: var(--color-secondary);
+            color: var(--color-primary);
+            font-size: large;
+        }
+    }
