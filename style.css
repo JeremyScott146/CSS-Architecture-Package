@@ -4,12 +4,8 @@
 /* Jeremy Scott's Portfolio Site 
 GIT 414/514 Fall Session-A 62919 | 76175
 CSS Architecture Package
-
-
-
 */ 
 @layer reset, base, layout, components, utilities, states, overrides;
-
 @layer reset {
   *,
   *::before,
@@ -128,16 +124,33 @@ CSS Architecture Package
 
 @layer layout {
     .container {
-        width: 100%;
-        max-width: var(--container-max);
+        width: min(100% - 2rem, var(--container-max));
+        margin-inline: auto;
+    }
+
+    main {
+        padding-block: clamp(2rem, 5vw, 4rem);
     }
 
     .grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--space-5);
-    margin-block: var(--space-6);
-  }
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+        gap: var(--space-5);
+        margin-block: var(--space-6);
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fill, minmax(8rem, 1fr));
+        gap: var(--space-3);
+        margin-block: var(--space-4);
+    }
+
+    .project-container {
+        container-type: inline-size;
+    }
 }
 
 @layer components {
@@ -148,31 +161,55 @@ CSS Architecture Package
     }
 
     .nav-list {
-        display: flex;
-        gap: var(--space-5);
-        align-items: center; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    padding-block: var(--space-3);
     }
 
     /* project card */
     .project-card {
-        display: flex;
-        flex-direction: column;
-        background: var(--card-bg);
-        padding: var(--space-4);
-        border: 1px solid var(--card-border);
-        border-radius: var(--radius-md);
-        gap: var(--space-3);
+    display: grid;
+    background: var(--card-bg);
+    padding: var(--space-4);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-md);
+    gap: var(--space-3);
     }
 
     /* le buttons */ 
     .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: var(--space-2) var(--space-4);
-        border-radius: var(--radius-md);
-        cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    background: var(--button-bg);
+    color: var(--btn-txt);
+    border: 0;
+    }
+
+    @supports (width: fit-content) {
+    .btn {
         width: fit-content;
+    }
+    }
+
+    .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-secondary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+
+    position: fixed;
+    inset-inline-end: var(--space-4);
+    inset-block-end: var(--space-4);
     }
 
     /* tech stack */ 
@@ -208,11 +245,21 @@ CSS Architecture Package
         padding: var(--space-3);
         margin: var(--space-6);
     }
+
+    @container (min-width: 30rem) {
+    .project-card {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+
+    .project-card h2 {
+        grid-column: 1 / -1;
+    }
+    }
 }
 
 @layer utilities {
     /* used google/AI on this section to find ideas for utilities for a portfolio site */ 
-
     /* fluid typography between different size viewports */ 
     .text-fluid-lg {
         font-size: clamp(1.25rem, 2vw + 1rem, 2.25rem);
@@ -262,10 +309,18 @@ CSS Architecture Package
     .form-input:invalid:not(:placeholder-shown) {
     border-color: var(--color-error);
     }
+
+    .back-to-top:hover {
+    background: var(--color-primary-hover);
+    }
+
+    .back-to-top:focus-visible {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+    }
 }
 
 @layer overrides {
-    
 }
 
 @media print {
@@ -279,3 +334,25 @@ CSS Architecture Package
             font-size: large;
         }
     }
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+    }
+}    
+
+@media (min-width: 45rem) {
+    .nav-list {
+        flex-wrap: nowrap;
+        gap: var(--space-5);
+    }
+}    
+
