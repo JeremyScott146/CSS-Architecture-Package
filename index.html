@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Jeremy Scott's Portfolio Site</title>
 
     <meta name="author" content="Jeremy Scott">
-    <meta name="description" content="Hi, I'm Jeremy Scott. I am a full-stack web developer and I love working on responsive websites. Come check out my latest projects and see how I can help you make your projects come alive!">
+    <meta name="description" content="Hi, I'm Jeremy Scott. I'm a full-stack web developer and I love building responsive websites. Come check out my latest projects!">
 
-    <!-- link to stylesheet-->
+    <!-- Link to stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body id="top">
     <header class="site-header">
         <div class="container">
-            <nav class="site-nav" aria-label="primary-navigation">
+            <nav class="site-nav" aria-label="Primary navigation">
                 <ul class="nav-list">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#" aria-current="page">Home</a></li>
                     <li><a href="#">About Me</a></li>
                     <li><a href="#">Projects</a></li>
                     <li><a href="#">Skills</a></li>
@@ -25,30 +27,62 @@
             </nav>
         </div>
     </header>
-    <main class="container">
-        <h1 class="text-center">Jeremy Scott's Portfolio Site</h1>
-        <div class="grid-layout">
-            <article class="project-card">
-                <h2>Project #1</h2>
-                <p>Checkout my github page for my most recent project! -> https://github.com/JeremyScott146 </p>
-                <a href="#" class="btn mt-auto">Project</a>
-            </article>
 
+    <main class="container">
+        <h1>Jeremy Scott's Portfolio Site</h1>
+        <div class="grid-layout">
+            <div class="project-container">
+                <article class="project-card">
+                    <h2>Project #1</h2>
+
+                    <p>
+                        Check out my GitHub page for my most recent project!
+                    </p>
+
+                    <a href="https://github.com/JeremyScott146" class="btn">
+                        View Project
+                    </a>
+                </article>
+            </div>
             <section class="project-card">
                 <h2>Contact Me</h2>
                 <form action="#">
                     <div class="form-field">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-input" placeholder="youremail@email.com" required>
+
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-input"
+                            placeholder="youremail@email.com"
+                            required>
                     </div>
-                    <button type="submit" class="btn">Submit</button>
+                    <button type="submit" class="btn">
+                        Submit
+                    </button>
                 </form>
             </section>
         </div>
-</main>
-        
+
+        <section class="skills-section">
+            <h2>My Skills</h2>
+            <div class="skills-grid">
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Java</span>
+                <span class="tech-badge">GitHub</span>
+            </div>
+        </section>
+        <!-- btt -->
+        <a href="#top" class="back-to-top">Back to Top</a>
+    </main>
+
     <footer class="site-footer">
-        <p>&copy; 2026 Jeremy Scott. GIT 414/514 Fall Session-A 62919|76175</p>
+        <p>
+            &copy; 2026 Jeremy Scott. GIT 414/514 Fall Session-A 62919 | 76175
+        </p>
     </footer>
+
 </body>
 </html>
